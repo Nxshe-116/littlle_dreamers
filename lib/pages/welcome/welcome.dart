@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:little_dreamers/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:little_dreamers/pages/welcome/bloc/welcome_events.dart';
 import 'package:little_dreamers/pages/welcome/bloc/welcome_state.dart';
@@ -37,22 +38,27 @@ class _WelcomeState extends State<Welcome> {
                   }
                 },
                 children: [
-                  page(1, context, "Next", 'Welcome to Little Dreamers',
-                      'Connecting Young Carers across Australia', "Image 1"),
+                  page(
+                      1,
+                      context,
+                      "Next",
+                      'Welcome to Little Dreamers',
+                      ' Connecting and supporting young carers across all of Australia',
+                      "assets/star-animation.png"),
                   page(
                       2,
                       context,
                       "Next",
                       'Join the Community',
                       'Chat with peers and connect with team leaders',
-                      "Image 1"),
+                      "assets/connected.png"),
                   page(
                       3,
                       context,
                       "Get Started",
                       'Explore and Grow',
                       'Journaling, videos and more to support your journey',
-                      "Image 1")
+                      "assets/video.png")
                 ],
               ),
               Positioned(
@@ -83,7 +89,10 @@ class _WelcomeState extends State<Welcome> {
         SizedBox(
           width: 345.w,
           height: 345.w,
-          child: Text(imagePath),
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+          ),
         ),
         Container(
             child: Text(
