@@ -3,7 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:little_dreamers/pages/sign_in/sign_in.dart';
+
 import 'package:little_dreamers/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:little_dreamers/pages/welcome/bloc/welcome_events.dart';
 import 'package:little_dreamers/pages/welcome/bloc/welcome_state.dart';
@@ -17,6 +18,7 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  PageController pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,6 +32,7 @@ class _WelcomeState extends State<Welcome> {
             alignment: Alignment.topCenter,
             children: [
               PageView(
+                controller: pageController,
                 onPageChanged: (index) {
                   state.page = index;
                   BlocProvider.of<WelcomeBloc>(context).add(WelcomeEvent());
@@ -94,14 +97,13 @@ class _WelcomeState extends State<Welcome> {
             fit: BoxFit.cover,
           ),
         ),
-        Container(
-            child: Text(
-          title,
-          style: TextStyle(
-              color: Colors.black,
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w500),
-        )),
+        Text(
+                  title,
+                  style: TextStyle(
+          color: Colors.black,
+          fontSize: 24.sp,
+          fontWeight: FontWeight.w500),
+                ),
         Container(
             width: 375.w,
             padding: EdgeInsets.only(left: 30.w, right: 30.w),
@@ -113,31 +115,45 @@ class _WelcomeState extends State<Welcome> {
                   fontSize: 14.sp,
                   fontWeight: FontWeight.normal),
             )),
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColors.secondary,
-                width: 2.5,
-                style: BorderStyle.solid,
+        GestureDetector(
+          onTap: () {
+            if (index < 3) {
+              pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.decelerate);
+            } else {
+              //Jummp tp new page
+              // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SignIn()));
+
+                     Navigator.of(context).pushNamedAndRemoveUntil("signInPage", (route)=>false);
+            }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(
+                  color: AppColors.secondary,
+                  width: 2.5,
+                  style: BorderStyle.solid,
+                ),
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15.w),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.5),
+                      spreadRadius: 0,
+                      blurRadius: 0,
+                      offset: Offset(10, 9))
+                ]),
+            margin: EdgeInsets.only(top: 100.h, left: 25.w, right: 25.w),
+            width: 325.w,
+            height: 50.h,
+            child: Center(
+              child: Text(
+                buttonName,
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
               ),
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(15.w),
-              ),
-              boxShadow: [
-                BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.5),
-                    spreadRadius: 0,
-                    blurRadius: 0,
-                    offset: Offset(10, 9))
-              ]),
-          margin: EdgeInsets.only(top: 100.h, left: 25.w, right: 25.w),
-          width: 325.w,
-          height: 50.h,
-          child: Center(
-            child: Text(
-              buttonName,
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
             ),
           ),
         )
