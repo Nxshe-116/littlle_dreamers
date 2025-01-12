@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+ 
 import 'package:little_dreamers/pages/sign_in/sign_in.dart';
 
 import 'package:little_dreamers/pages/welcome/bloc/welcome_bloc.dart';
@@ -13,19 +14,21 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
+ 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => WelcomeBloc(),
-        )
+        ),
+      //  BlocProvider(
+      //     create: (context) => SignInBloc(),
+      //   )
       ],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Little Dreamers',
           theme: customTheme,
           home: const Welcome(),
           routes: {

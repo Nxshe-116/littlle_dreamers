@@ -30,16 +30,33 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 46.h,
                 ),
-                Text("Welcome Back",
-                    style: TextStyle(
-                        color: AppColors.secondary,
-                        fontSize: 27.sp,
-                        fontWeight: FontWeight.w800)),
-                Text("Enter your credentials to continue ",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.normal)),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Welcome Back",
+                            style: TextStyle(
+                                color: AppColors.secondary,
+                                fontSize: 27.sp,
+                                fontWeight: FontWeight.w800)),
+                        Text("Enter your credentials to continue ",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.normal)),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Image.asset(
+                      "assets/star-animation.png",
+                      height: 85,
+                      width: 85,
+                    )
+                  ],
+                ),
                 Container(
                   margin: EdgeInsets.only(top: 46.h),
                   child: Column(
@@ -77,6 +94,21 @@ class _SignInState extends State<SignIn> {
                         textColor: Colors.white,
                         iconColor: Colors.white,
                         icon: LineAwesomeIcons.facebook_f,
+                      ),
+                      SizedBox(
+                        height: 45.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account? Sign Up",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
                       )
                     ],
                   ),
